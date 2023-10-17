@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:moneymate/cal.dart';
 
@@ -33,7 +32,7 @@ class Expense extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.red[900],
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -42,7 +41,7 @@ class Expense extends StatelessWidget {
           icon: const Icon(Icons.arrow_back),
           color: Colors.black,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.red[900],
         elevation: 0,
         title: const Padding(
           padding: EdgeInsets.only(left: 77),
@@ -215,7 +214,7 @@ class Expense extends StatelessWidget {
                     height: 60,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.purple,
+                            backgroundColor: Colors.red[900],
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18))),
                         onPressed: () {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moneymate/login.dart';
+import 'package:moneymate/login/login.dart';
 import 'package:moneymate/provider/provider.dart';
 
 class Profile extends StatelessWidget {

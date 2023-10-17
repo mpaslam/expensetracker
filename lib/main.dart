@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import  'package:moneymate/home.dart';
-import 'package:moneymate/login.dart';
+import 'package:moneymate/login/login.dart';
 import 'package:moneymate/provider/provider.dart';
 import 'package:provider/provider.dart';
 
