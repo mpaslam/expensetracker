@@ -12,7 +12,20 @@
           "package_name": "com.example.moneymate"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "808869607962-s2kd0jj9lebk0akotc2bh74r8938m8hn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.moneymate",
+            "certificate_hash": "9d79fe53a0cc64b31ab6317180c1d64a515178db"
+          }
+        },
+        {
+          "client_id": "808869607962-su33v440vibt5cs75mmncc8d37898nil.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC174sSTmXWX7yXf4XyDNziwZsvHJzTyv0"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "808869607962-su33v440vibt5cs75mmncc8d37898nil.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "808869607962-90ebc6oe4ituqigkcne2kur9r8qbq8l0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.moneymate"
+              }
+            }
+          ]
         }
       }
     }
