@@ -11,7 +11,9 @@ class Profile extends StatelessWidget {
       appBar: AppBar(),
       body: ElevatedButton(
           onPressed: () {
-            FirebaseAuth.instance.signOut().then((value) {
+            FirebaseAuth.instance.signOut().
+            
+            then((value) {
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(

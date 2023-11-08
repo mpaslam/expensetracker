@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:moneymate/firebase_options.dart';
 import 'package:moneymate/login/registration_page.dart';
+import 'package:moneymate/pages/home.dart';
 import 'package:moneymate/provider/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +33,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         backgroundColor: Colors.white,
       ),
-      home: RegistrationPage(),
+      home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snap) {
+            if (snap.data != null || snap.hasData) {
+              return Home();
+            }
+            return RegistrationPage();
+          }),
     );
   }
 }

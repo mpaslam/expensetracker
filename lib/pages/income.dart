@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:moneymate/cal.dart';
+import 'package:moneymate/provider/provider.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class Incomepage extends StatelessWidget {
@@ -24,7 +26,7 @@ class Incomepage extends StatelessWidget {
     String? p;
     double screenWidth = MediaQuery.of(context).size.width;
     double screenheigt = MediaQuery.of(context).size.height;
-
+    final pv = Provider.of<ProviderClass>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.green[800],
@@ -227,6 +229,8 @@ class Incomepage extends StatelessWidget {
                                     DateFormat('HH:mm').format(DateTime.now()),
                                 type: 'income',
                                 wallet: '');
+                            pv.transactions.add(obj);
+
                             Navigator.pop(context, obj);
                           } else {
                             showDialog(

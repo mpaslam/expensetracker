@@ -1,0 +1,112 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
+import 'package:moneymate/cal.dart';
+
+class ProviderClass extends ChangeNotifier {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
+  double balance = 0;
+  double income = 0;
+  double expense = 0;
+
+  List<Returnvalue> transactions = [];
+
+  ProviderClass() {
+    fetchDataFromFirestore();
+  }
+
+  Future<void> fetchDataFromFirestore() async {
+    try {
+      if (auth.currentUser != null) {
+        DocumentSnapshot documentSnapshot = await firestore
+            .collection('users')
+            .doc(auth.currentUser!.uid)
+            .get();
+
+        if (documentSnapshot.exists) {
+          Map<String, dynamic> userData =
+              documentSnapshot.data() as Map<String, dynamic>;
+
+          balance = userData['balance'] as double;
+          income = userData['income'] as double;
+          expense = userData['expense'] as double;
+
+          List<Map<String, dynamic>> transactionData =
+              userData['transactions'] as List<Map<String, dynamic>>;
+          transactions = transactionData.map((transactionMap) {
+            return Returnvalue.fromMap(transactionMap);
+          }).toList();
+        }
+      }
+    } catch (e) {
+      print('Error fetching data from Firestore: $e');
+    }
+    notifyListeners();
+  }
+
+  void addIncome(double addedIncome) {
+    income += addedIncome;
+    balance += addedIncome;
+    saveDataToFirestore();
+    notifyListeners();
+  }
+
+  void addExpense(num expenseValue) {
+    expense += expenseValue;
+    balance -= expenseValue;
+    saveDataToFirestore();
+    notifyListeners();
+  }
+
+  Future<void> addTransaction(Returnvalue details) async {
+    transactions.add(details);
+    saveTransactionsToFirestore();
+  }
+
+  Future<void> saveTransactionsToFirestore() async {
+    if (auth.currentUser != null) {
+      CollectionReference userCollection = firestore.collection('users');
+      List<Map<String, dynamic>> transactionMaps = transactions.map((transaction) {
+        return transaction.toMap();
+      }).toList();
+
+      await userCollection.doc(auth.currentUser!.uid).update({
+        'transactions': transactionMaps,
+      });
+    }
+    notifyListeners();
+  }
+
+  Future<void> saveDataToFirestore() async {
+    if (auth.currentUser != null) {
+      CollectionReference userCollection = firestore.collection('users');
+      await userCollection.doc(auth.currentUser!.uid).update({
+        'balance': balance,
+        'income': income,
+        'expense': expense,
+      });
+    }
+  }
+
+  void clearData() async {
+    income = 0;
+    expense = 0;
+    balance = 0;
+    transactions = [];
+
+    saveDataToFirestore();
+    notifyListeners();
+  }
+
+  void login() async {
+    // Handle login as per your requirements.
+    // This could involve authentication with Firebase
+    // and then setting the user in Firestore.
+  }
+
+  void logout() async {
+    // Handle logout as per your requirements.
+    // This could involve Firebase logout and clearing user data in Firestore.
+  }
+}
