@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:moneymate/login/login_page.dart';
+import 'package:moneymate/provider/provider.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -11,16 +11,7 @@ class Profile extends StatelessWidget {
       appBar: AppBar(),
       body: ElevatedButton(
           onPressed: () {
-            FirebaseAuth.instance.signOut().
-            
-            then((value) {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginPage(),
-                  ),
-                  (route) => false);
-            });
+            Provider.of<ProviderClass>(context, listen: false).signOut(context);
           },
           child: Text('logout')),
     );

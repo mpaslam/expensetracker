@@ -4,21 +4,13 @@ class OperationModel {
    double totalbalance;
  final List<Returnvalue> returnvalue;
 
-  // static OperationModel instance =OperationModel.getInstance();
-    
-  
-  //   factory OperationModel.getInstance() {
-    
-  //   return instance;
-  // }
-
   OperationModel(
       {this.income = 0,
       this.expense = 0,
       this.totalbalance = 0,
       required this.returnvalue});
 
-  factory OperationModel.fromjson(Map<String, dynamic> json) {
+  factory OperationModel.fromjson(Map<String, dynamic> json) {                   //opertion nashi
     List<dynamic> returnjson = json['returnvalue'];
     List<Returnvalue> returnlist =
         returnjson.map((e) => Returnvalue.fromJson(e)).toList();

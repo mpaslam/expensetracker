@@ -230,6 +230,7 @@ class Incomepage extends StatelessWidget {
                                 type: 'income',
                                 wallet: '');
                             pv.transactions.add(obj);
+                            //  pv.addlist();
 
                             Navigator.pop(context, obj);
                           } else {
